@@ -1,0 +1,267 @@
+##############################################################################
+#
+#                   web2py Deployment Guide on Fedora
+#
+# This document serves as the guide to deploy web2py on Fedora/RHEL/CentOS.
+# It contains instructions which can be run directly in a shell. This document
+# is written based on the older Fedora web2py deployment script, which can be
+# gotten here: http://web2py.googlecode.com/hg/scripts/setup-web2py-fedora.sh
+#
+# Distribution Tested: Fedora 19
+# Target Web Server: Apahce 2.4
+#
+# Update: 2013/08/28
+#
+# Author: Xiaokui
+# Auhtor (setup-web2py-fedora.sh): berubejd
+#
+##############################################################################
+
+###
+###  Step/Phase List
+###
+
+# Please change to root using "su" or "sudo -i"
+
+# 1.Install packages for web2py and web server
+# 2.Fetch and install web2py
+# 3.Configure SELinux
+# 4.Configure firewallD/iptables
+# 5.Create a self signed ssl certificate
+# 6.Configure Apache
+# 7.Setup web2py applications
+# 8.Troubleshooting
+
+###
+###  Phase 1: Install packages for web2py and web server
+###
+
+# Verify packages are up to date
+yum update
+
+# Install required packages
+yum install httpd mod_ssl mod_wsgi wget python checkpolicy policycoreutils policycoreutils-devel
+
+###
+### Phase 2 - Fetch and install web2py
+###
+
+# Need to pick up a directory to hold web2py
+# web2py can be put in the default web server directory: /var/www/html/
+
+# "cd" to the holding directory and download web2py
+wget http://web2py.com/examples/static/web2py_src.zip
+unzip web2py_src.zip
+# apache is the default httpd (apache) user and group name
+chown -R apache:apache web2py
+
+###
+### Phase 3 - Configure SELinux
+###
+
+# SELinux is on by default
+# Disabling it solves the issue, but it is not recommended
+
+# Two things needs to be done
+
+# 3.1 set context (like privilege and ownership in normal Linux)
+# The path may needs to be changed due to the deployment directory
+chcon -R -t httpd_user_content_t /var/www/html/*
+
+# 3.2 create SELinux policy
+mkdir /tmp/web2py
+cd /tmp/web2py
+# create a file named wsgi.te, fill it with content between "########"
+########
+module wsgi 1.0;
+
+require {
+    type urandom_device_t;
+    type httpd_t;
+    type tmp_t;
+    class file { write open };
+    class chr_file write;
+    class process execmem;
+}
+
+#============= httpd_t ==============
+allow httpd_t tmp_t:file { write open };
+allow httpd_t urandom_device_t:chr_file write;
+allow httpd_t self:process execmem;
+########
+
+# generate modules for SELinux and install the module
+checkmodule -M -m -o wsgi.mod wsgi.te
+semodule_package -o wsgi.pp -m wsgi.mod
+semodule -i wsgi.pp
+
+###
+### Phase 4 - Configure firewallD/iptables
+###
+
+# Fedora 18 and later uses firewallD by default
+# Use "systemctl" to find whether you are running firewallD or iptables
+
+### If you are using firewallD
+# firewall-cmd [--zone=<zone>] --add-port=<port>[-<port>]/<protocol>
+firewall-cmd --add-port 80/tcp
+firewall-cmd --add-port 443/tcp
+
+### If you are using iptables
+# It is assumed that you replace firewallD with iptables and
+# you are familar with iptables rules
+# You need two new rules to access port 80 (http) and 443 (https)
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
+
+# The chain "INPUT" may need to be changed according to your configuraion
+# If you edit file "/etc/sysconfig/iptables", you need to restart iptables
+systemctl restart iptables.service
+
+###
+### Phase 5 - Create a self signed ssl certificate
+###
+
+mkdir -p /etc/httpd/ssl
+
+openssl genrsa 1024 > /etc/httpd/ssl/self_signed.key
+openssl req -new -x509 -nodes -sha1 -days 365 -key /etc/httpd/ssl/self_signed.key > /etc/httpd/ssl/self_signed.cert
+openssl x509 -noout -fingerprint -text < /etc/httpd/ssl/self_signed.cert > /etc/httpd/ssl/self_signed.info
+
+chmod 400 /etc/httpd/ssl/self_signed.*
+
+###
+### Phase 6 - Configure Apache
+###
+
+# backup old configurations
+mv /etc/httpd/conf.d /etc/httpd/conf.d.disabled
+
+# create file /etc/httpd/conf.d/vhost.conf, fill it with content between "########"
+# directory "/var/www/html/web2py" may need to be replaced according to the specific deployment
+########
+NameVirtualHost *:80
+
+<VirtualHost *:80>
+    WSGIDaemonProcess web2py user=apache group=apache
+    WSGIProcessGroup web2py
+    WSGIScriptAlias / /var/www/html/web2py/wsgihandler.py
+    WSGIPassAuthorization On
+
+    <Directory /var/www/html/web2py>
+        AllowOverride None
+        Order Allow,Deny
+        Deny from all
+        <Files wsgihandler.py>
+            Allow from all
+        </Files>
+    </Directory>
+
+    AliasMatch ^/([^/]+)/static/(?:_[\d]+.[\d]+.[\d]+/)?(.*) \
+            /var/www/html/web2py/applications/$1/static/$2
+    <Directory /var/www/html/web2py/applications/*/static/>
+        Options -Indexes
+        Order Allow,Deny
+        Allow from all
+    </Directory>
+
+    <Location /admin>
+        Deny from all
+    </Location>
+
+    <LocationMatch ^/([^/]+)/appadmin>
+        Deny from all
+    </LocationMatch>
+
+    CustomLog /var/log/httpd/access_log common
+    ErrorLog /var/log/httpd/error_log
+</VirtualHost>
+########
+
+# create file /etc/httpd/conf.d/vhost-ssl.conf, fill it with content between "########"
+########
+Listen 443 https
+
+NameVirtualHost *:443
+
+<VirtualHost *:443>
+    SSLEngine on
+    SSLCertificateFile /etc/httpd/ssl/self_signed.cert
+    SSLCertificateKeyFile /etc/httpd/ssl/self_signed.key
+
+    WSGIProcessGroup web2py
+    WSGIScriptAlias / /var/www/html/web2py/wsgihandler.py
+    WSGIPassAuthorization On
+
+    <Directory /var/www/html/web2py>
+        AllowOverride None
+        Order Allow,Deny
+        Deny from all
+        <Files wsgihandler.py>
+            Allow from all
+        </Files>
+    </Directory>
+
+    AliasMatch ^/([^/]+)/static/(?:_[\d]+.[\d]+.[\d]+/)?(.*) \
+            /var/www/html/web2py/applications/$1/static/$2
+    <Directory /var/www/html/web2py/applications/*/static/>
+        Options -Indexes
+        ExpiresActive On
+        ExpiresDefault "access plus 1 hour"
+        Order Allow,Deny
+        Allow from all
+    </Directory>
+
+    CustomLog /var/log/httpd/access_log common
+    ErrorLog /var/log/httpd/error_log
+
+</VirtualHost>
+########
+
+# Fix wsgi socket locations
+echo "WSGISocketPrefix run/wsgi" >> /etc/httpd/conf.d/wsgi.conf
+
+# Restart Apache to pick up changes
+systemctl restart httpd.service
+
+###
+### Phase 7 - Setup web2py applications
+###
+
+# Setup web2py admin password
+# cd to your web2py directory, e.g., /var/www/html/web2py
+sudo -u apache python -c "from gluon.main import save_password; save_password(raw_input('admin password: '),443)"
+
+# Copy your applications to the applications directory
+chown -R apache:apache /var/www/html/web2py
+chcon -R -t httpd_user_content_t /var/www/html/web2py
+# You may want to remove default applications such as "examples", "admin" and "welcome"
+
+###
+### Done
+###
+
+###
+### Phase 8 - Troubleshooting
+###
+
+# If your deployment does not go well, please check the logs here to find out clues:
+/var/log/httpd/error_log
+/var/log/audit/audit.log
+
+# The former is the error information recorded from Apache
+# The latter contains error information for SELinux
+
+# If you visit your website and see nothing, it is probably a network error
+# Your firewall configurations need to be checked
+
+# If you visit your website and get permission errors in the browser, it is probably SELinux error
+# It is usually something like this in audit.log
+type=AVC msg=audit(1377268345.907:116): avc:  denied  { write } for  pid=2239 comm="httpd" name="gluon" dev="sda2" ino=268163 scontext=system_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:httpd_sys_content_t:s0 tclass=dir
+
+# For SELinux error, you need to use audit2allow to generate a customized policy to allow the operations
+# Detailed information at https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security-Enhanced_Linux/sect-Security-Enhanced_Linux-Fixing_Problems-Allowing_Access_audit2allow.html
+grep httpd /var/log/audit/audit.log | audit2allow -m wsgix > wsgix.te
+checkmodule -M -m -o wsgix.mod wsgix.te
+semodule_package -o wsgix.pp -m wsgix.mod
+semodule -i wsgix.pp
