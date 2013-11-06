@@ -1,0 +1,56 @@
+# transparency - true or false (default)
+!URxvt*transparent: true
+
+# tint with any color; i.e., blue, red, tomato4, olivedrab2, etc.
+#   some nice listings are at:
+#     http://www.nisrv.com/drupal/?q=node/11
+#     http://www.htmlgoodies.com/tutorials/colors/article.php/3478921
+!URxvt*tintColor: Blue
+
+# shading - 0 to 99 darkens, 101 to 200 lightens.
+#   Don't use with tintColor; just use a darker or lighter color instead.
+#URxvt*shading: 40
+
+# scrollback buffer lines - 65535 is max on most machines (64 is default)
+URxvt*saveLines: 12000
+
+# Xft: DejaVu fonts
+#  Fedora/debian packages: dejavu-sans-mono-fonts/ttf-dejavu 
+URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:antialias=true:hinting=true,xft:SimSun
+URxvt*boldfont: xft:DejaVu Sans Mono:pixelsize=12:antialias=true:hinting=true,xft:SimSun
+
+# color theme: Tango
+
+! black
+URxvt*color0:  #2E3436
+URxvt*color8:  #555753
+! red
+URxvt*color1:  #a40000
+URxvt*color9:  #EF2929
+! green
+URxvt*color2:  #4E9A06
+URxvt*color10: #8AE234
+! yellow
+URxvt*color3:  #C4A000
+URxvt*color11: #FCE94F
+! blue
+URxvt*color4:  #3465A4
+URxvt*color12: #729FCF
+! purple
+URxvt*color5:  #75507B
+URxvt*color13: #AD7FA8
+! orange (replaces cyan)
+URxvt*color6:  #ce5c00
+URxvt*color14: #fcaf3e
+! white
+URxvt*color7:  #babdb9
+URxvt*color15: #EEEEEC
+
+# scrollbar - true (default) or false
+URxvt*scrollBar: false
+
+# scrollbar position - left=false (default) or right=true
+URxvt*scrollBar_right: false
+
+# scrollbar style - rxvt (default), plain, next, or xterm
+URxvt*scrollstyle: rxvt

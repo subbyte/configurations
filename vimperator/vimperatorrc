@@ -1,0 +1,6 @@
+noremap j 7j
+noremap k 7k
+noremap h 7h
+noremap l 7l
+noremap <C-c> <C-v><C-c>
+noremap <C-v> <C-v><C-v>

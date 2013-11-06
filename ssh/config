@@ -1,0 +1,13 @@
+Host *
+    #use my local keys on remote machines
+    ForwardAgent yes
+    #keep the connection alive for finnecky servers, and kill it when the
+    #connection has died
+    ServerAliveInterval 15
+    ServerAliveCountMax 3
+    #Set up control sockets so multiple ssh/scp/sftp sessions can share one
+    #connection
+    ControlPath ~/.ssh/master-%r@%h:%p
+    ControlMaster auto
+    #allow local and proxy commands
+    PermitLocalCommand yes
