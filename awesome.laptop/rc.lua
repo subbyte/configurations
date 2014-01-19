@@ -283,7 +283,8 @@ globalkeys = awful.util.table.join(
 
     -- Screen Lock
     awful.key({ }, "XF86Launch1", function ()
-        awful.util.spawn("i3lock -c 000000") end),
+        -- awful.util.spawn("i3lock -c 000000") end),
+        awful.util.spawn("dm-tool lock") end),
 
     -- Extended Screen
     awful.key({ }, "XF86Display", function ()
