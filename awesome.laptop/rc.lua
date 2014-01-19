@@ -458,9 +458,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- {{{ Autorun program
-awful.util.spawn_with_shell("xrandr --output LVDS1 --auto --output DP1 --auto --right-of LVDS1")
 awful.util.spawn_with_shell("xbacklight -set 75")
 awful.util.spawn_with_shell("xset s off")
 awful.util.spawn_with_shell("xset -dpms")
---awful.util.spawn_with_shell("dispwin -d 2 /mnt/wind/etc/monitorICC/dell_u2211h.icc")
 -- }}}
