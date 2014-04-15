@@ -461,5 +461,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.util.spawn_with_shell("xbacklight -set 75")
 awful.util.spawn_with_shell("xset s off")
 awful.util.spawn_with_shell("xset -dpms")
-awful.util.spawn_with_shell("xmodmap -e 'pointer = 3 2 1'")
 -- }}}
