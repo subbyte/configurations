@@ -57,11 +57,6 @@ function QuakeConsole:display()
         end
     end
 
-    if not client and not self.visible then
-        -- The terminal is not here yet but we don't want it yet. Just do nothing.
-        return
-    end
-
     if not client then
         -- The client does not exist, we spawn it
         awful.util.spawn(self.term .. " " .. string.format(self.argname, self.name), false, self.screen)
