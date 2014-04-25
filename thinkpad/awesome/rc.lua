@@ -14,6 +14,10 @@ local menubar = require("menubar")
 -- My widget lib
 require("wids")
 
+-- Drop-down terminal
+-- Please configure the terminal in quake.lua
+require("quake")
+
 -- Calendar widget
 require("calendar2")
 
@@ -212,6 +216,13 @@ for s = 1, screen.count() do
 end
 -- }}}
 
+-- {{{ Drop-down terminal
+quakeconsole = {}
+for s = 1, screen.count() do
+    quakeconsole[s] = quake({ terminal = terminal, screen = s })
+end
+-- }}}
+
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
@@ -272,31 +283,50 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
     awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run({ prompt = "Run Lua code: " },
-                  mypromptbox[mouse.screen].widget,
-                  awful.util.eval, nil,
-                  awful.util.getdir("cache") .. "/history_eval")
-              end),
+        function ()
+              awful.prompt.run({ prompt = "Run Lua code: " },
+              mypromptbox[mouse.screen].widget,
+              awful.util.eval, nil,
+              awful.util.getdir("cache") .. "/history_eval")
+        end),
+
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end),
+    awful.key({ modkey }, "p",
+        function()
+            menubar.show()
+        end),
 
     -- Screen Lock
-    awful.key({ }, "XF86Launch1", function ()
-        -- awful.util.spawn("i3lock -c 000000") end),
-        awful.util.spawn("dm-tool lock") end),
+    awful.key({ }, "XF86Launch1",
+        function ()
+            awful.util.spawn("dm-tool lock")
+        end),
 
     -- Extended Screen
-    awful.key({ }, "XF86Display", function ()
-        awful.util.spawn("xrandr --output LVDS1 --auto --output DP1 --auto --right-of LVDS1") end),
+    awful.key({ }, "XF86Display",
+        function ()
+            awful.util.spawn("xrandr --output LVDS1 --auto --output DP1 --auto --right-of LVDS1")
+        end),
 
     -- Volume Control
-    awful.key({ }, "XF86AudioRaiseVolume", function ()
-        awful.util.spawn("amixer set Master 3%+") end),
-    awful.key({ }, "XF86AudioLowerVolume", function ()
-        awful.util.spawn("amixer set Master 3%-") end),
-    awful.key({ }, "XF86AudioMute", function ()
-        awful.util.spawn("amixer set Master toggle") end)
+    awful.key({ }, "XF86AudioRaiseVolume",
+        function ()
+            awful.util.spawn("amixer set Master 3%+")
+        end),
+    awful.key({ }, "XF86AudioLowerVolume",
+        function ()
+            awful.util.spawn("amixer set Master 3%-")
+        end),
+    awful.key({ }, "XF86AudioMute",
+        function ()
+            awful.util.spawn("amixer set Master toggle")
+        end),
+
+    -- Drop-down terminal
+    awful.key({ modkey, }, "`",
+        function ()
+            quakeconsole[mouse.screen]:toggle()
+        end)
 )
 
 clientkeys = awful.util.table.join(
@@ -362,6 +392,7 @@ clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize))
+-- }}}
 
 -- Set keys
 root.keys(globalkeys)
