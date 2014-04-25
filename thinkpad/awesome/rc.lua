@@ -14,8 +14,7 @@ local menubar = require("menubar")
 -- My widget lib
 require("wids")
 
--- Drop-down terminal
--- Please configure the terminal in quake.lua
+-- quake console
 require("quake")
 
 -- Calendar widget
@@ -216,10 +215,10 @@ for s = 1, screen.count() do
 end
 -- }}}
 
--- {{{ Drop-down terminal
+-- {{{ quake console
 quakeconsole = {}
 for s = 1, screen.count() do
-    quakeconsole[s] = quake({ terminal = terminal, screen = s })
+    quakeconsole[s] = quake({ term = terminal, screen = s })
 end
 -- }}}
 
@@ -322,7 +321,7 @@ globalkeys = awful.util.table.join(
             awful.util.spawn("amixer set Master toggle")
         end),
 
-    -- Drop-down terminal
+    -- quake console
     awful.key({ modkey, }, "`",
         function ()
             quakeconsole[mouse.screen]:toggle()

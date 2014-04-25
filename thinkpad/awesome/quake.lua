@@ -64,7 +64,7 @@ function QuakeConsole:display()
 
     if not client then
         -- The client does not exist, we spawn it
-        awful.util.spawn(self.terminal .. " " .. string.format(self.argname, self.name), false, self.screen)
+        awful.util.spawn(self.term .. " " .. string.format(self.argname, self.name), false, self.screen)
         return
     end
 
@@ -111,7 +111,7 @@ function QuakeConsole:new(config)
 
     -- The application to be invoked is:
     --   config.terminal .. " " .. string.format(config.argname, config.name)
-    config.terminal = config.terminal or "xterm"        -- application to spawn
+    config.term     = config.term     or "xterm"        -- application to spawn
     config.name     = config.name     or "QuakeConsole" -- window name
     config.argname  = config.argname  or "-name %s"     -- how to specify window name
 
