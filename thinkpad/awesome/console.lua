@@ -2,7 +2,12 @@
 -- Similar to "quake console": http://awesome.naquadah.org/wiki/Drop-down_terminal
 --
 -- Difference: console created at awesome launch time, so it is more smooth
--- at the first time calling the console.
+-- at the first time calling the console. There is only one console for all screen.
+--
+-- Usage:
+--      require("console")
+--      awful.key({ modkey, }, "`", function () console.toggle() end)
+--      console.init(terminal)
 
 local awful = require("awful")
 local capi  = { mouse = mouse, screen = screen, client = client, timer = timer }

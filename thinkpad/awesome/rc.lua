@@ -315,10 +315,7 @@ globalkeys = awful.util.table.join(
         end),
 
     -- cc console
-    awful.key({ modkey, }, "`",
-        function ()
-            console.toggle()
-        end)
+    awful.key({ modkey, }, "`", function () console.toggle() end)
 )
 
 clientkeys = awful.util.table.join(
