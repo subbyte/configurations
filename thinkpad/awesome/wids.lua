@@ -6,11 +6,21 @@ local vicious = require("vicious")
 module("wids")
 
 -- Thermal widget
--- package temperature, higher than CPU core temperature, fresh every 4s
-thermwidget = wibox.widget.textbox("thermwidget")
-vicious.register(thermwidget, vicious.widgets.thermal, " Temp: $1°C ", 4, {"thermal_zone0", "sys"})
+-- package temperature, higher than CPU core temperature, refresh every 4s
+thermwidget = wibox.widget.textbox("")
+vicious.register(thermwidget, vicious.widgets.thermal, " CPU: $1°C ", 4, {"thermal_zone0", "sys"})
 
 -- Battery widget
--- fresh every 30s
-batwidget = wibox.widget.textbox("batterywidget")
+-- refresh every 30s
+batwidget = wibox.widget.textbox("")
 vicious.register(batwidget, vicious.widgets.bat, " Battery: $2% [$1$3] ", 30, "BAT0")
+
+-- ALSA Volume widget
+-- refresh every 1s
+volwidget = wibox.widget.textbox("")
+vicious.register(volwidget, vicious.widgets.volume, " Volume: $1% ", 1, "Master")
+
+-- Weather widget
+-- refresh every 5min (upstream data update every 20min)
+weatwidget = wibox.widget.textbox("")
+vicious.register(weatwidget, vicious.widgets.weather, " Blacksburg: ${tempf}°F ", 300, "KBCB")
