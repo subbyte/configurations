@@ -14,8 +14,8 @@ local menubar = require("menubar")
 -- My widget lib
 require("wids")
 
--- quake console
-require("quake")
+-- cc console
+require("console")
 
 -- Calendar widget
 require("calendar2")
@@ -215,13 +215,6 @@ for s = 1, screen.count() do
 end
 -- }}}
 
--- {{{ quake console
-quakeconsole = {}
-for s = 1, screen.count() do
-    quakeconsole[s] = quake({ term = terminal, screen = s })
-end
--- }}}
-
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
@@ -321,10 +314,10 @@ globalkeys = awful.util.table.join(
             awful.util.spawn("amixer set Master toggle")
         end),
 
-    -- quake console
+    -- cc console
     awful.key({ modkey, }, "`",
         function ()
-            quakeconsole[mouse.screen]:toggle()
+            console.toggle()
         end)
 )
 
@@ -487,8 +480,12 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
+-- {{{ cc console
+console.init(terminal)
+-- }}}
+
 -- {{{ Autorun program
-awful.util.spawn_with_shell("xbacklight -set 75")
-awful.util.spawn_with_shell("xset s off")
-awful.util.spawn_with_shell("xset -dpms")
+awful.util.spawn("xbacklight -set 75")
+awful.util.spawn("xset s off")
+awful.util.spawn("xset -dpms")
 -- }}}
