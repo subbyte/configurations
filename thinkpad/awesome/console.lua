@@ -44,7 +44,7 @@ function init(terminal)
     end
 
     local reattach = capi.timer { timeout = 0 }
-    reattach:connect_signal("timeout", function() reattach:stop() create(console_term) end)
+    reattach:connect_signal("timeout", function() reattach:stop() create() end)
     reattach:start()
 
     capi.client.connect_signal("manage", function (c, startup)
@@ -64,36 +64,38 @@ function toggle()
     init(nil)
     local cc = get_console_client()
 
-    if cc.hidden then
-        -- Comptute size
-        local geom = capi.screen[capi.mouse.screen].workarea
-        local width, height, x, y
-        width = geom.width - (console_margin + console_borderwidth) * 2
-        height = geom.height * console_height_ratio
-        x = geom.x + console_margin
-        y = geom.height + geom.y - height - console_margin - console_borderwidth
+    if cc ~= nil then
+        if cc.hidden then
+            -- Comptute size
+            local geom = capi.screen[capi.mouse.screen].workarea
+            local width, height, x, y
+            width = geom.width - (console_margin + console_borderwidth) * 2
+            height = geom.height * console_height_ratio
+            x = geom.x + console_margin
+            y = geom.height + geom.y - height - console_margin - console_borderwidth
 
-        -- Resize
-        awful.client.floating.set(cc, true)
-        cc.border_width = console_borderwidth
-        cc.size_hints_honor = false
-        cc:geometry({ x = x, y = y, width = width, height = height })
+            -- Resize
+            awful.client.floating.set(cc, true)
+            cc.border_width = console_borderwidth
+            cc.size_hints_honor = false
+            cc:geometry({ x = x, y = y, width = width, height = height })
 
-        -- Sticky and on top
-        cc.ontop = true
-        cc.above = true
-        cc.skip_taskbar = true
-        cc.sticky = true
+            -- Sticky and on top
+            cc.ontop = true
+            cc.above = true
+            cc.skip_taskbar = true
+            cc.sticky = true
 
-        -- This is not a normal window, don't apply any specific keyboard stuff
-        cc:buttons({})
-        cc:keys({})
+            -- This is not a normal window, don't apply any specific keyboard stuff
+            cc:buttons({})
+            cc:keys({})
 
-        -- display the console
-        cc.hidden = false
-        cc:raise()
-        capi.client.focus = cc
-    else
-        cc.hidden = true
+            -- display the console
+            cc.hidden = false
+            cc:raise()
+            capi.client.focus = cc
+        else
+            cc.hidden = true
+        end
     end
 end
