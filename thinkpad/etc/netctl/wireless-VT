@@ -1,0 +1,17 @@
+Description='VT-Wireless'
+Interface=wlan0
+Connection=wireless
+Security=wpa-configsection
+IP=dhcp
+IP6=stateless
+
+WPAConfigSection=(
+    'ssid="VT-Wireless"'
+    'proto=RSN'
+    'key_mgmt=WPA-EAP'
+    'eap=TLS'
+    'identity="abc"'
+    'private_key="ijk.p12"'
+    'private_key_passwd="xyz"'
+    'ca_cert="/etc/ssl/certs/GlobalSign_Root_CA.pem"'
+)
