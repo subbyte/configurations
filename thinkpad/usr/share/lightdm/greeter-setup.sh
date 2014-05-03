@@ -4,6 +4,3 @@
 
 # light on numlock
 /usr/bin/numlockx on
-
-# left-hand mouse buttons
-xmodmap -e "pointer = 3 2 1"
