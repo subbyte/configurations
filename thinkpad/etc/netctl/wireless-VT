@@ -1,5 +1,5 @@
 Description='VT-Wireless'
-Interface=wlan0
+Interface=wlp3s0
 Connection=wireless
 Security=wpa-configsection
 IP=dhcp
