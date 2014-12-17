@@ -1,0 +1,4 @@
+#### Thinkpad X1 ####
+
+# unmute mic after install
+amixer sset Capture toggle
