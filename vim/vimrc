@@ -103,9 +103,8 @@ set tm=500
 syntax enable "Enable syntax hl
 
 " Set font according to system
-set gfn=Monospace\ 10
-if MySys() == "windows"
-    set guifont=Yahei_Mono:11
+if has("win32")
+    set guifont=Yahei_Mono:h11
 else
     set gfn=Monospace\ 10
 endif
