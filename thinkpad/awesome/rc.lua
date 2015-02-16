@@ -299,7 +299,7 @@ globalkeys = awful.util.table.join(
     -- Extended Screen
     awful.key({ }, "XF86Display",
         function ()
-            awful.util.spawn("xrandr --output LVDS1 --auto --output DP1 --auto --right-of LVDS1")
+            awful.util.spawn("xrandr --output LVDS1 --auto --output `xrandr | awk '$2==\"connected\" {print $1}' | grep -v LVDS1` --auto --right-of LVDS1")
         end),
 
     -- Volume Control
