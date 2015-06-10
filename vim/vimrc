@@ -38,7 +38,11 @@ set number
 
 " Copy and paste
 set pastetoggle=<F2>
-set clipboard=unnamedplus
+if has("mac")
+    set clipboard=unnamed
+else
+    set clipboard=unnamedplus
+endif
 
 set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
 
