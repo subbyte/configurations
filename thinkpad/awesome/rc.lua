@@ -201,8 +201,10 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(wids.thermwidget)
-    right_layout:add(wids.batwidget)
+    right_layout:add(wids.diowidget)
+    right_layout:add(wids.wifiwidget)
     right_layout:add(wids.volwidget)
+    right_layout:add(wids.batwidget)
     right_layout:add(wids.weatwidget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
