@@ -1,8 +1,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
-" pathogen
+" Pathogen
 " NERDtree
 " nerdcommenter
+" fencview
+" vim-fish
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -11,13 +13,16 @@
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
+set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
 
 " Sets how many lines of history VIM has to remember
-set history=700
+set history=1000
+
+" Pathogen
+execute pathogen#infect()
 
 " Enable filetype plugin
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -33,31 +38,19 @@ nmap <leader>w :w!<cr>
 " Fast leaving
 nmap <leader>q :qa<cr>
 
+" Make
+nmap <leader>m :!make<cr>
+
 " Show number
 set number
 
 " Copy and paste
 set pastetoggle=<F2>
-if has("mac")
-    set clipboard=unnamed
-else
-    set clipboard=unnamedplus
-endif
-
-set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
-
-" Make
-nmap <leader>m :!make<cr>
-
-" Load plugins in ~/.vim/bundle using pathegon
-call pathogen#infect()
+set clipboard=unnamedplus
 
 " auto load NERDTree
 if has("gui_running")
     autocmd VimEnter * NERDTree
-endif
-if !has("gui_running")
-  autocmd VimEnter * wincmd l
 endif
 
 
@@ -97,7 +90,6 @@ set mat=2 "How many tenths of a second to blink
 set noerrorbells
 set novisualbell
 set t_vb=
-set tm=500
 
 
 
@@ -107,25 +99,14 @@ set tm=500
 syntax enable "Enable syntax hl
 
 " Set font according to system
-if has("win32")
-    set guifont=Yahei_Mono:h11
-else
-    set gfn=Monospace\ 10
-endif
-set shell=/bin/bash
+set gfn=Monospace\ 10
 
 if has("gui_running")
   set guioptions-=T
   set guioptions-=r
   set guioptions-=L
-  "set guioptions-=m
-  set t_Co=256
-  set background=dark
-  colorscheme codeschool
-else
-  set t_Co=256
-  colorscheme tomorrow
 endif
+colorscheme molokai
 
 set encoding=utf8
 try
@@ -145,17 +126,6 @@ set nobackup
 set nowb
 set noswapfile
 
-"Persistent undo
-try
-    if MySys() == "windows"
-      set undodir=C:\Windows\Temp
-    else
-      set undodir=~/.vim_runtime/undodir
-    endif
-    
-    set undofile
-catch
-endtry
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -167,7 +137,6 @@ set tabstop=4
 set smarttab
 
 set lbr
-"set tw=500
 
 set ai "Auto indent
 set si "Smart indet
@@ -254,3 +223,10 @@ let g:Tex_DefaultTargetFormat = "pdf"
 let g:tex_flavor = "latex"
 let g:Tex_ViewRule_pdf = "zathura"
 let Tlist_Use_Right_Window = 1
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Encoding detection with fencview.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:fencview_autodetect = 1

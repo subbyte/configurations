@@ -27,7 +27,7 @@ vicious.register(weatwidget, vicious.widgets.weather, " Blacksburg: ${tempf}°F 
 
 -- Disk I/O
 diowidget = wibox.widget.textbox("")
-vicious.register(diowidget, vicious.widgets.dio, " SSD: ${sda read_mb} / ${sda write_mb}MB ", 1)
+vicious.register(diowidget, vicious.widgets.dio, " SSD: ${sda read_mb} / ${sda write_mb}MB ", 2)
 
 -- WiFi
 wifiwidget = wibox.widget.textbox("")
