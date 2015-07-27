@@ -31,4 +31,4 @@ vicious.register(diowidget, vicious.widgets.dio, " SSD: ${sda read_mb} / ${sda w
 
 -- WiFi
 wifiwidget = wibox.widget.textbox("")
-vicious.register(wifiwidget, vicious.widgets.wifi, " WiFi: ${rate} Mb/s [${link}/70] ", 4, "wlp3s0")
+vicious.register(wifiwidget, vicious.widgets.wifi, " WiFi: ${linp}% ", 4, "wlp3s0")
