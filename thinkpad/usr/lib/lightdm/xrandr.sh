@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-ENABLEDP1=$(xrandr -q | grep 'DP1 connected')
+EXTMONITOR=$(xrandr -q | grep " connected" | awk '{print $1}' | grep -v LVDS1)
 
-if [ -n "$ENABLEDP1" ]; then
-    xrandr --output LVDS1 --auto --output DP1 --auto --right-of LVDS1
+if [ -n "$EXTMONITOR" ]; then
+    xrandr --output LVDS1 --auto --output $EXTMONITOR --auto --right-of LVDS1
 else
     xrandr --output LVDS1 --auto
 fi
