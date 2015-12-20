@@ -9,19 +9,24 @@ end
 function fish_mode_prompt
   if set -q __fish_vi_mode
     echo " "
+    if [ (id -u) = "0" ]
+      set userprompt "#"
+    else
+      set userprompt "%"
+    end
     switch $fish_bind_mode
       case default
         set_color magenta
-        echo "%"
+        echo $userprompt
       case insert
         set_color green
-        echo "%"
+        echo $userprompt
       case replace-one
         set_color green
-        echo "%"
+        echo $userprompt
       case visual
         set_color magenta
-        echo "%"
+        echo $userprompt
     end
     set_color normal
     echo " "
@@ -40,7 +45,7 @@ function pwd_for_prompt
 end
 
 function fish_right_prompt
-  set_color black
+  # set_color black
   echo (pwd_for_prompt)
   set_color yellow
   echo (hostname)" "
@@ -51,9 +56,11 @@ end
 #### greeting phrase ####
 
 function greeting_phrase
-  set -l phrases "Wake up, Neo. The Matrix has you." "Follow the white rabbit." "Knock knock, Neo."
-  echo " >"
-  echo $phrases[(shuf -i 1-3 -n 1)]
+  if [ (id -u) != "0" ]
+    set -l phrases "Wake up, Neo. The Matrix has you." "Follow the white rabbit." "Knock knock, Neo."
+    echo " >"
+    echo $phrases[(shuf -i 1-3 -n 1)]
+  end
 end
 
 set -g -x fish_greeting (greeting_phrase)
