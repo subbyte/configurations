@@ -1,0 +1,24 @@
+# 
+# /etc/fstab: static file system information
+#
+# Use "lsblk -f" to check UUID information
+#
+# <file system>					                <dir>			    <type>		<options>						        	                <dump>	<pass>
+
+# /dev/sda7
+UUID=90d5c517-844a-4b0d-96a4-98874a3f49db       /                   xfs       	rw,relatime,attr2,inode64,noquota                           0       1
+
+# /dev/sda6
+UUID=0f61af59-b9d2-4884-9245-6e01858ce25b       /boot               ext2      	rw,relatime                                                 0       2
+
+# /dev/sda8
+UUID=f09f33cd-dde0-4e53-9693-1c80928521df       /workshop           xfs       	rw,relatime,attr2,inode64,noquota                           0       2
+
+# /dev/sda5
+UUID=F2CC4B15CC4AD38F                           /mnt/wind           ntfs-3g     noatime,discard,uid=subx,gid=users,dmask=022,fmask=133		0	    0
+
+# /dev/sda9
+UUID=2cbafb2a-7603-43c9-92aa-6098f989ad8e       none                swap        defaults                                                    0       0
+
+# memory map
+tmpfs                                           /home/subx/.cache   tmpfs       nodev,nosuid,size=400M					                    0	    0
