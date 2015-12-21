@@ -8,3 +8,4 @@
 # more info: https://wiki.archlinux.org/index.php/VDPAU
 
 export VDPAU_DRIVER=va_gl
+export LIBVA_DRIVER_NAME=gallium

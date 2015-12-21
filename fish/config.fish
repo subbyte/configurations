@@ -68,9 +68,6 @@ set -g -x fish_greeting (greeting_phrase)
 
 #### environment variables ####
 
-set -g -x VDPAU_DRIVER va_gl
-set -g -x LIBVA_DRIVER_NAME gallium
-
 set -g -x EDITOR vim
 set -g -x SVN_EDITOR vim
 set -g -x PYTHONSTARTUP ~/.pythonrc
