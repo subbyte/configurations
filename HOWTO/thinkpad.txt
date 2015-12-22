@@ -2,3 +2,33 @@
 
 # unmute mic after install
 amixer sset Capture toggle
+
+# turn off bluetooth (only once needed)
+rfkill block bluetooth
+
+# fonts
+1) put MS Windows fonts into /usr/share/fonts/win/, "win" is essential for correct font ordering
+2) install fonts from pacman
+        adobe-source-code-pro-fonts
+        adobe-source-sans-pro-fonts
+        adobe-source-serif-pro-fonts
+        fontsproto
+        t1lib
+        texlive-fontsextra
+        texlive-genericextra
+        ttf-bitstream-vera
+        ttf-dejavu
+        ttf-linux-libertine
+        xorg-font-util
+        xorg-fonts-alias
+        xorg-fonts-encodings
+        xorg-fonts-misc
+        xorg-mkfontscale
+        adobe-source-han-sans-cn-fonts
+        adobe-source-han-sans-otc-fonts
+        ttf-fira-sans
+        ttf-inconsolata
+        ttf-liberation
+        ttf-ubuntu-font-family
+3) fc-cache
+4) reboot

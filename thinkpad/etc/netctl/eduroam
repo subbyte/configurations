@@ -1,0 +1,18 @@
+Description='Federated Educational Wifi Network'
+Interface=wlp3s0
+Connection=wireless
+Security=wpa-configsection
+
+IP=dhcp
+IP6=stateless
+
+WPAConfigSection=(
+    'ssid="eduroam"'
+    'proto=RSN'
+    'key_mgmt=WPA-EAP'
+    'eap=PEAP'
+    'phase2="auth=MSCHAPV2"'
+    'anonymous_identity="anonymous@vt.edu"'
+    'identity="xxxx@vt.edu"'
+    'password="xxxxxxxx"'
+)
