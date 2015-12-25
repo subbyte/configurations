@@ -7,7 +7,7 @@ amixer sset Capture toggle
 rfkill block bluetooth
 
 # fonts
-1) put MS Windows fonts into /usr/share/fonts/win/, "win" is essential for correct font ordering
+1) put MS Windows fonts into /usr/share/fonts/msfonts/, make sure mode set to 644
 2) install fonts from pacman
         adobe-source-code-pro-fonts
         adobe-source-sans-pro-fonts
