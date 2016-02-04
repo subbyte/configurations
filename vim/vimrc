@@ -3,8 +3,9 @@
 " Pathogen
 " NERDtree
 " nerdcommenter
-" fencview
 " vim-fish
+" vim-airline
+" vim-airline-themes
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -205,6 +206,9 @@ function! HasPaste()
         return ''
     endif
 endfunction
+
+" Airline theme
+let g:airline_theme='bubblegum'
 
 
 
