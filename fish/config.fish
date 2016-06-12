@@ -1,13 +1,14 @@
 #### vi mode and prompt ####
 
-fish_vi_mode
+fish_vi_key_bindings
 
 function fish_prompt
   echo -n ""
 end
 
+# override the default fish_mode_prompt function
 function fish_mode_prompt
-  if set -q __fish_vi_mode
+  if test "$fish_key_bindings" = "fish_vi_key_bindings"
     echo " "
     if [ (id -u) = "0" ]
       set userprompt "#"
@@ -75,6 +76,10 @@ set -g -x PYTHONSTARTUP ~/.pythonrc
 
 #### alias ####
 
-function proxysite
-  ssh -f -N -D 7070 user@site.com
+function proxymalaga
+  ssh -f -N -D 7070 -p 10022 subx@malaga.cs.vt.edu
+end
+
+function grading
+  ssh -p 7022 test@localhost
 end
