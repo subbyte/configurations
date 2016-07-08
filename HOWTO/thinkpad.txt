@@ -3,6 +3,10 @@
 # unmute mic after install
 amixer sset Capture toggle
 
+# default sound card could be wrong, e.g.,HDMI, change it to PCH
+# edit file /etc/modprobe.d/alsa-base.conf with the following line
+# options snd-hda-intel id=PCH,HDMI index=1,0
+
 # turn off bluetooth (only once needed)
 rfkill block bluetooth
 
