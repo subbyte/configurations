@@ -1,0 +1,22 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+my $font = "DejaVu Sans Mono";
+my $fontsize = 16;
+my $level = 1;
+
+sub on_user_command
+{
+	my ($self, $cmd) = @_;
+
+	if ($cmd eq "zoom:in") {
+		$level++;
+	} elsif ($cmd eq "zoom:out") {
+		$level-- if $level gt 1;
+	}
+
+	my $size = $level * $fontsize;
+	$self->cmd_parse("\033]50;xft:${font}:pixelsize=${size}\007");
+}
