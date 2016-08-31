@@ -6,9 +6,9 @@ use warnings;
 
 my $font = "DejaVu Sans Mono";
 # font size in .Xresources is 16
-my $fontsize_step = 8;
-my $level = 2;
-my $level_min = 2;
+my $fontsize_step = 4;
+my $level = 4;
+my $level_min = 4;
 
 sub on_user_command
 {
