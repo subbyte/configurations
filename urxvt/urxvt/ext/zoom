@@ -1,11 +1,14 @@
 #!/usr/bin/perl
+# Font Zoom Perl Extension
 
 use strict;
 use warnings;
 
 my $font = "DejaVu Sans Mono";
-my $fontsize = 16;
-my $level = 1;
+# font size in .Xresources is 16
+my $fontsize_step = 8;
+my $level = 2;
+my $level_min = 2;
 
 sub on_user_command
 {
@@ -14,9 +17,9 @@ sub on_user_command
 	if ($cmd eq "zoom:in") {
 		$level++;
 	} elsif ($cmd eq "zoom:out") {
-		$level-- if $level gt 1;
+		$level-- if $level gt $level_min;
 	}
 
-	my $size = $level * $fontsize;
+	my $size = $level * $fontsize_step;
 	$self->cmd_parse("\033]50;xft:${font}:pixelsize=${size}\007");
 }
