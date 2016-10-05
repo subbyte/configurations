@@ -1,4 +1,4 @@
-Xft.antialias:              true
+Xft.antialias:true
 Xft.autohint:               0
 Xft.dpi:                    96
 Xft.hinting:                true
@@ -6,9 +6,9 @@ Xft.hintstyle:              hintslight
 Xft.lcdfilter:              lcddefault
 Xft.rgba:                   rgb
 
-urxvt.boldColors:           on
-URxvt.font:                 xft:DejaVu Sans Mono:pixelsize=16,xft:SimSun
-URxvt.boldfont:             xft:DejaVu Sans Mono:pixelsize=16,xft:SimSun
+URxvt.boldColors:           on
+URxvt.font:                 xft:DejaVu Sans Mono:pixelsize=12,xft:SimSun
+URxvt.boldfont:             xft:DejaVu Sans Mono:pixelsize=12,xft:SimSun
 
 URxvt.cursorBlink:          true
 URxvt.depth:                24
@@ -55,14 +55,14 @@ URxvt.color7:  #babdb9
 URxvt.color15: #EEEEEC
 
 ! load perl extensions
-URxvt.perl-ext-comm:        font-size,keyboard-select
-
-! perl extension: font-size
-URxvt.keysym.C-Up:          font-size:increase
-URxvt.keysym.C-Down:        font-size:decrease
-
-! perl extension: keyboard selection
-URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+URxvt.perl-ext-common:      selection-to-clipboard,zoom,keyboard-select
 
 ! update clipboard whenever primary changes (block selected)
 URxvt.clipboard.autocopy:   true
+
+! perl extension: zoom
+URxvt.keysym.C-equal:       perl:zoom:in
+URxvt.keysym.C-minus:       perl:zoom:out
+
+! perl extension: keyboard selection
+URxvt.keysym.M-Escape:      perl:keyboard-select:activate
