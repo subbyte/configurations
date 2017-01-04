@@ -1,2 +1,2 @@
 install expiretable
-`pkg install expiretable`
+```pkg install expiretable```
