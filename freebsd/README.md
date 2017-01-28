@@ -1,6 +1,8 @@
 FreeBSD 11.0 Setup
 ====
 
+### Wireless Setup
+
 #### Hardware
 
 Intel Wireless-N 7260 (802.11bgn, not Dual Band version, 2.4G Hz only)
@@ -38,4 +40,26 @@ network={
         ssid="xxxx"
         psk="xxxx"
 }
+```
+
+### Nginx Setup
+
+#### nginx installation and configuration
+
+```
+pkg install nginx
+echo 'nginx_enable="YES"' >> /etc/rc.conf
+```
+edit `/usr/local/etc/nginx/nginx.conf` following [nginx.conf](https://github.com/subbyte/configurations/blob/master/freebsd/nginx/nginx.conf)
+
+#### Digitial certificate setup (Let's Encrypt)
+- install certbot
+```
+pkg install py27-certbot
+```
+
+### OS Daily Update
+```
+freebsd-update fetch
+freebsd-update install
 ```
