@@ -11,8 +11,8 @@ Intel Wireless-N 7260 (802.11bgn, not Dual Band version, 2.4G Hz only)
 
 #### Wireless driver infomation
 
-- iwm driver works: https://www.freebsd.org/cgi/man.cgi?query=iwm&sektion=4&manpath=freebsd-release-ports
-- manually test the iwm driver
+- `iwm` driver works: https://www.freebsd.org/cgi/man.cgi?query=iwm&sektion=4&manpath=freebsd-release-ports
+- manually test the `iwm` driver
 ```
 kldload if_iwm
 ifconfig wlan0 create wlandev iwm0
@@ -55,7 +55,7 @@ echo 'nginx_enable="YES"' >> /etc/rc.conf
 edit `/usr/local/etc/nginx/nginx.conf` following [nginx.conf](https://github.com/subbyte/configurations/blob/master/freebsd/nginx/nginx.conf)
 
 #### Digitial certificate setup (Let's Encrypt)
-- install certbot
+- install `certbot`
 ```
 pkg install py27-certbot
 ```
@@ -65,9 +65,21 @@ pkg install py27-certbot
   - copy `/etc/ssl/certs` to the new server (`dhparam.pem`)
   - copy `/srv/www` and `/srv/empty` to the new server
 
-- test certbot
+- test `certbot`
 ```
 certbot renew --dry-run
+```
+
+### sshd Setup
+-/etc/ssh/sshd_config
+```
+Protocol 2
+AllowUsers xxx yyy
+LoginGraceTime 2m
+PermitRootLogin no
+StrictModes yes
+MaxAuthTries 6
+MaxSessions 20
 ```
 
 ### Firewall Setup
@@ -76,7 +88,7 @@ This rule blocks a IP for 1 hour if it connects to `sshd` service more than 3 ti
 ```
 pkg install expiretable
 ```
-- setup pf in `/etc/pf.conf`
+- /etc/pf.conf
 ```
 table <bruteforce> persist
 block quick from <bruteforce>
