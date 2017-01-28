@@ -69,15 +69,11 @@ certbot renew --dry-run
 ```
 
 ### Firewall Setup
-
-#### install `expiretable`
+This rule block a IP if it connections to `sshd` service more than 3 times per minute
+- install `expiretable`
 ```
 pkg install expiretable
 ```
-
-#### Firewall pf configuration
-This rule drop 3 or more connections per minute to the `sshd` server, block IP for 1 hour
-
 - setup pf in `/etc/pf.conf`
 ```
 table <bruteforce> persist
