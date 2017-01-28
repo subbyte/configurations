@@ -60,7 +60,8 @@ pkg install py27-certbot
 - miragting from old server
   - copy `/usr/local/etc/letsencrypt` to new server with links preserved
   - copy `/etc/ssl/certs` to the new server (`dhparam.pem`)
-  - copy `/srv/www` and /srv/empty` to the new server
+  - copy `/srv/www` and `/srv/empty` to the new server
+  
 - test certbot
 ```
 certbot renew --dry-run
