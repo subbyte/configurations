@@ -83,7 +83,7 @@ pass inet proto tcp from any to any port ssh \
   (max-src-conn 3, max-src-conn-rate 4/60, \
   overload <bruteforce> flush global)
 ```
-- setup expiretable for IP blocking and forgetting in `/etc/rc.conf`
+- setup pf and expiretable in `/etc/rc.conf`
 ```
 # firewall with ssh bruteforce rules enforced
 pf_enable="YES"
