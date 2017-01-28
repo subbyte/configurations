@@ -57,13 +57,45 @@ edit `/usr/local/etc/nginx/nginx.conf` following [nginx.conf](https://github.com
 ```
 pkg install py27-certbot
 ```
+
 - miragting from old server
   - copy `/usr/local/etc/letsencrypt` to new server with links preserved
   - copy `/etc/ssl/certs` to the new server (`dhparam.pem`)
   - copy `/srv/www` and `/srv/empty` to the new server
+
 - test certbot
 ```
 certbot renew --dry-run
+```
+
+### Firewall Setup
+
+#### install `expiretable`
+```
+pkg install expiretable
+```
+
+#### Firewall pf configuration
+This rule drop 3 or more connections per minute to the `sshd` server, block IP for 1 hour
+
+- setup pf in `/etc/pf.conf`
+```
+table <bruteforce> persist
+block quick from <bruteforce>
+pass inet proto tcp from any to any port ssh \
+  flags S/SA keep state \
+  (max-src-conn 3, max-src-conn-rate 4/60, \
+  overload <bruteforce> flush global)
+```
+- setup expiretable for IP blocking and forgetting in `/etc/rc.conf`
+```
+# firewall with ssh bruteforce rules enforced
+pf_enable="YES"
+pf_rules="/etc/pf.conf"
+pflog_enable="YES"
+# clear older-than-hour IPs from PF bruteforce table
+expiretable_enable="YES"
+expiretable_flags="-v -d -t 1h bruteforce"
 ```
 
 ### OS Daily Update
