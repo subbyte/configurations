@@ -71,7 +71,7 @@ certbot renew --dry-run
 ```
 
 ### sshd Setup
--/etc/ssh/sshd_config
+- /etc/ssh/sshd_config
 ```
 Protocol 2
 AllowUsers xxx yyy
