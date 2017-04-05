@@ -1,7 +1,7 @@
 FreeBSD 11.0 Setup
 ====
 
-wireless, nginx, firewall
+wireless, nginx, sshd, firewall
 
 ### Wireless Setup
 
