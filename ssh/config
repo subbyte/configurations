@@ -11,3 +11,7 @@ Host *
     ControlMaster auto
     #allow local and proxy commands
     PermitLocalCommand yes
+
+Host nodeA nodeB
+    User xxx
+    ProxyCommand ssh firewall.com -W %h:%p
