@@ -1,3 +1,10 @@
+Host firewall.com
+    ControlMaster no
+
+Host nodeA nodeB
+    User xxx
+    ProxyCommand ssh firewall.com -W %h:%p
+
 Host *
     #use my local keys on remote machines
     ForwardAgent yes
@@ -11,7 +18,3 @@ Host *
     ControlMaster auto
     #allow local and proxy commands
     PermitLocalCommand yes
-
-Host nodeA nodeB
-    User xxx
-    ProxyCommand ssh firewall.com -W %h:%p
