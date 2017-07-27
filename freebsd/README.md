@@ -110,6 +110,7 @@ expiretable_flags="-v -d -t 1h bruteforce"
 
 ### OS Daily Update
 ```
+pkg upgrade
 freebsd-update fetch
 freebsd-update install
 ```
