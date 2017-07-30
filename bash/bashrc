@@ -23,7 +23,7 @@ set_prompt()
    local txtwhite="$(tput setaf 7)"
    local tolastline="$(tput cup $LINES)"
 
-   PS1="\[$tolastline\]\n\[$txtbold\]\[$txtgreen\][\D{%a %Y-%d-%m %H:%M:%S}]"
+   PS1="\[$tolastline\]\n\[$txtbold\]\[$txtgreen\][\D{%a %Y-%m-%d %H:%M:%S}]"
    PS1+=" "
    PS1+="\[$txtblack\]\u@\h:\w"
    PS1+="\[$txtreset\]\n\\$ "
