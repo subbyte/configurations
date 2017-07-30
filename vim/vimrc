@@ -103,6 +103,7 @@ syntax enable "Enable syntax hl
 set gfn=Monospace\ 10
 
 if has("gui_running")
+  set guioptions-=m
   set guioptions-=T
   set guioptions-=r
   set guioptions-=L
