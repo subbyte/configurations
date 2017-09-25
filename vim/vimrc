@@ -92,6 +92,8 @@ set noerrorbells
 set novisualbell
 set t_vb=
 
+set completeopt=menuone,menu,longest
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
