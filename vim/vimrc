@@ -101,6 +101,8 @@ set completeopt=menuone,menu,longest
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable "Enable syntax hl
 
+syntax spell toplevel
+
 " Set font according to system
 set gfn=Monospace\ 10
 
