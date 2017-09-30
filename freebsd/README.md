@@ -90,6 +90,9 @@ pkg install expiretable
 ```
 - /etc/pf.conf
 ```
+pass quick inet proto tcp \
+  from 10.0.0.0/16 to any port ssh
+
 table <bruteforce> persist
 block quick from <bruteforce>
 pass inet proto tcp from any to any port ssh \
