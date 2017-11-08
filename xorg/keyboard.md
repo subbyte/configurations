@@ -13,25 +13,17 @@
   - (Right) Alt -> (Left) Control
   - (Left) Control -> Esc
   - Esc -> (Right) Control
-- create file `/usr/share/X11/xkb/symbols/hhkb`
+- create file `/usr/share/X11/xkb/symbols/subkb`
 ```
 // (Right) Alt -> (Left) Control
-partial modifier_keys
-xkb_symbols "ralt_become_lctrl" {
-    replace key <RALT> { [ Control_L, Control_L ] };
-    replace key <LCTL> { [ Alt_R, Meta_R ] };
-};
-
 // (Left) Control -> Esc
-partial modifier_keys
-xkb_symbols "lctrl_become_esc" {
-    replace key <LCTL> { [ Escape ] };
-};
-
 // Esc -> (Right) Control
 partial modifier_keys
-xkb_symbols "esc_become_rctrl" {
-    replace key <ESC> { [ Control_R ] };
+xkb_symbols "ralt_lctrl" {
+    replace key <RALT> { [ Control_L ] };
+    key <LCTL> { [ Escape ] };
+    key <ESC> { [ Control_R ] };
+    modifier_map Control { <RALT>, <ESC> };
 };
 ```
 - add to file `/usr/share/X11/xkb/rules/evdev` section `! option    =   symbols`
@@ -53,7 +45,7 @@ hhkb:esc_become_rctrl   Esc -> (Right) Control
   - Backspace <-> Backslash
   - (Right) Alt -> (Left) Control
   - Tilde <-> (Right) Control
-- create file `/usr/share/X11/xkb/symbols/subx`
+- create file `/usr/share/X11/xkb/symbols/subkb`
 ```
 partial modifier_keys
 xkb_symbols "swapescape" {
@@ -73,8 +65,8 @@ xkb_symbols "swap_bksp_bksl" {
 // Swap Tilde and Right Control
 partial modifier_keys
 xkb_symbols "ctrl_alt_tilde" {
-    key <RALT> { [ Control_L ] };
-    key <RCTL> { [ grave, asciitilde ] };
+    replace key <RALT> { [ Control_L ] };
+    replace key <RCTL> { [ grave, asciitilde ] };
     key <TLDE> { [ Control_R ] };
     modifier_map Control { <LCTL>, <RALT>, <TLDE> };
 };
