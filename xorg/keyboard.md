@@ -20,7 +20,8 @@
 // Esc -> (Right) Control
 partial modifier_keys
 xkb_symbols "hhkb_map" {
-    replace key <RALT> { [ Control_L ] };
+    replace key <RALT> { type[Group1] = "TWO_LEVEL",
+                         symbols[Group1] = [ Control_L, Control_L ] };
     replace key <LCTL> { [ Escape ] };
     replace key <ESC> { [ Control_R ] };
     modifier_map Control { <RALT>, <ESC> };
