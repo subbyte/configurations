@@ -19,24 +19,20 @@
 // (Left) Control -> Esc
 // Esc -> (Right) Control
 partial modifier_keys
-xkb_symbols "ralt_lctrl" {
+xkb_symbols "hhkb_map" {
     replace key <RALT> { [ Control_L ] };
-    key <LCTL> { [ Escape ] };
-    key <ESC> { [ Control_R ] };
+    replace key <LCTL> { [ Escape ] };
+    replace key <ESC> { [ Control_R ] };
     modifier_map Control { <RALT>, <ESC> };
 };
 ```
 - add to file `/usr/share/X11/xkb/rules/evdev` section `! option    =   symbols`
 ```
-hhkb:ralt_become_lctrl   =   +hhkb(ralt_become_lctrl)
-hhkb:lctrl_become_esc    =   +hhkb(lctrl_become_esc)
-hhkb:esc_become_rctrl    =   +hhkb(esc_become_rctrl)
+subkb:hhkb_map   =   +subkb(hhkb_map)
 ```
 - add to file `/usr/share/X11/xkb/rules/evdev.lst` section `! option`
 ```
-hhkb:ralt_become_lctrl  (Right) Alt -> (Left) Control
-hhkb:lctrl_become_esc   (Left) Control -> Esc
-hhkb:esc_become_rctrl   Esc -> (Right) Control
+subkb:hhkb_map  (Right) Alt -> (Left) Control -> Esc -> (Right) Control
 ```
 
 ### Standard Keyboard
@@ -70,4 +66,17 @@ xkb_symbols "ctrl_alt_tilde" {
     key <TLDE> { [ Control_R ] };
     modifier_map Control { <LCTL>, <RALT>, <TLDE> };
 };
+```
+- add to file `/usr/share/X11/xkb/rules/evdev` section `! option    =   symbols`
+```
+subkb:swapescape   =   +subkb(swapescape)
+subkb:swap_bksp_bksl   =   +subkb(swap_bksp_bksl)
+subkb:ctrl_alt_tilde   =   +subkb(ctrl_alt_tilde)
+
+```
+- add to file `/usr/share/X11/xkb/rules/evdev.lst` section `! option`
+```
+subkb:swapescape    Swap Escape and CapsLock
+subkb:swap_bksp_bksl    Swap Backspace and Backslash
+subkb:ctrl_alt_tilde    Swap Tilde and Right Control
 ```
