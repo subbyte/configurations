@@ -48,11 +48,25 @@ hhkb:esc_become_rctrl   Esc -> (Right) Control
 ```
 
 ### Standard Keyboard
+- Functionalities:
+  - Esc <-> CapsLock
+  - Backspace <-> Backslash
+  - (Right) Alt -> (Left) Control
+  - Grave <-> (Right) Control
+- create file `/usr/share/X11/xkb/symbols/subx`
+```
+partial modifier_keys
+xkb_symbols "swap_bksp_bksl" {
+    // Swap Backspace and Backslash
+    key <BKSP> { [ backslash, bar ] };
+    key <BKSL> { [ BackSpace, BackSpace ] };
+};
 
-#### 1. Esc <-> CapsLock
-
-#### 2. Backspace <-> Backslash
-
-#### 3. (Right) Alt -> (Left) Control
-
-#### 4. Grave <-> (Right) Control
+// Right Alt key functions as another left Ctrl.
+partial modifier_keys
+xkb_symbols "ralt_lctrl" {
+    replace key <RALT> { type[Group1] = "TWO_LEVEL",
+                         symbols[Group1] = [ Control_L, Control_L ] };
+    modifier_map Control { <RALT> };
+};
+```
