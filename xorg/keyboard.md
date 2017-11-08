@@ -39,6 +39,17 @@ xkb_symbols "hhkb_adj" {
 ```
   subkb:hhkb_adj       5 replacements, see subkb for details
 ```
+- create file `/etc/X11/xorg.conf.d/30-keyboard.conf`
+```
+Section "InputClass"
+        Identifier "HHKB"
+        MatchIsKeyboard "on"
+        MatchProduct "HHKB Professional"
+        Driver "evdev"
+        Option "XkbLayout" "us"
+        Option "XkbOptions" "subkb:hhkb_adj"
+EndSection
+```
 
 ### Standard Keyboard
 - Functionalities:
@@ -73,4 +84,15 @@ xkb_symbols "std_adj" {
 - add to file `/usr/share/X11/xkb/rules/evdev.lst` section `! option`
 ```
   subkb:std_adj        4 replacements, see subkb for details
+```
+- create file `/etc/X11/xorg.conf.d/30-keyboard.conf`
+```
+Section "InputClass"
+        Identifier "standard keyboard"
+        MatchIsKeyboard "on"
+        MatchProduct "AT Translated Set 2 keyboard"
+        Driver "evdev"
+        Option "XkbLayout" "us"
+        Option "XkbOptions" "subkb:std_adj"
+EndSection
 ```
