@@ -15,11 +15,15 @@
   - Esc -> (Right) Control
 - create file `/usr/share/X11/xkb/symbols/subkb`
 ```
+// TLDE -> Delete
+// Henkan_Mode -> Grave / Tilde
 // (Right) Alt -> (Left) Control
 // (Left) Control -> Esc
 // Esc -> (Right) Control
 partial modifier_keys
 xkb_symbols "hhkb_map" {
+    key <TLDE> { [ Delete, Delete ] };
+    key <HENK> { [ grave, asciitilde ] };
     replace key <RALT> { type[Group1] = "TWO_LEVEL",
                          symbols[Group1] = [ Control_L, Control_L ] };
     replace key <LCTL> { [ Escape ] };
