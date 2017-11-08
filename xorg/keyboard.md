@@ -48,40 +48,29 @@ xkb_symbols "hhkb_adj" {
   - Tilde <-> (Right) Control
 - create file `/usr/share/X11/xkb/symbols/subkb`
 ```
+// Adjustment for standard keyboard
+// - Escape <-> CapsLock
+// - Backspace <-> Backslash
+// - (Right) Alt -> (Left) Control
+// - Tilde <-> (Right) Control
 partial modifier_keys
-xkb_symbols "swapescape" {
+xkb_symbols "std_adj" {
     key <CAPS> { [ Escape ] };
     key <ESC>  { [ Caps_Lock ] };
-    modifier_map Lock { <ESC> };
-};
- 
-// Swap Backspace and Backslash
-partial modifier_keys
-xkb_symbols "swap_bksp_bksl" {
     key <BKSP> { [ backslash, bar ] };
     key <BKSL> { [ BackSpace, BackSpace ] };
-};
-
-// Right Alt key functions as another left Ctrl.
-// Swap Tilde and Right Control
-partial modifier_keys
-xkb_symbols "ctrl_alt_tilde" {
-    replace key <RALT> { [ Control_L ] };
+    replace key <RALT> { type[Group1] = "TWO_LEVEL",
+                         symbols[Group1] = [ Control_L, Control_L ] };
+    key <TLDE> { [ Control_R, Control_R ] };
     replace key <RCTL> { [ grave, asciitilde ] };
-    key <TLDE> { [ Control_R ] };
-    modifier_map Control { <LCTL>, <RALT>, <TLDE> };
+    modifier_map Control { <RALT>, <TLDE> };
 };
 ```
 - add to file `/usr/share/X11/xkb/rules/evdev` section `! option    =   symbols`
 ```
-subkb:swapescape   =   +subkb(swapescape)
-subkb:swap_bksp_bksl   =   +subkb(swap_bksp_bksl)
-subkb:ctrl_alt_tilde   =   +subkb(ctrl_alt_tilde)
-
+  subkb:std_adj         =       +subkb(std_adj)
 ```
 - add to file `/usr/share/X11/xkb/rules/evdev.lst` section `! option`
 ```
-subkb:swapescape    Swap Escape and CapsLock
-subkb:swap_bksp_bksl    Swap Backspace and Backslash
-subkb:ctrl_alt_tilde    Swap Tilde and Right Control
+  subkb:std_adj        4 replacements, see subkb for details
 ```
