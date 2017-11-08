@@ -52,21 +52,30 @@ hhkb:esc_become_rctrl   Esc -> (Right) Control
   - Esc <-> CapsLock
   - Backspace <-> Backslash
   - (Right) Alt -> (Left) Control
-  - Grave <-> (Right) Control
+  - Tilde <-> (Right) Control
 - create file `/usr/share/X11/xkb/symbols/subx`
 ```
 partial modifier_keys
+xkb_symbols "swapescape" {
+    key <CAPS> { [ Escape ] };
+    key <ESC>  { [ Caps_Lock ] };
+    modifier_map Lock { <ESC> };
+};
+ 
+// Swap Backspace and Backslash
+partial modifier_keys
 xkb_symbols "swap_bksp_bksl" {
-    // Swap Backspace and Backslash
     key <BKSP> { [ backslash, bar ] };
     key <BKSL> { [ BackSpace, BackSpace ] };
 };
 
 // Right Alt key functions as another left Ctrl.
+// Swap Tilde and Right Control
 partial modifier_keys
-xkb_symbols "ralt_lctrl" {
-    replace key <RALT> { type[Group1] = "TWO_LEVEL",
-                         symbols[Group1] = [ Control_L, Control_L ] };
-    modifier_map Control { <RALT> };
+xkb_symbols "ctrl_alt_tilde" {
+    key <RALT> { [ Control_L ] };
+    key <RCTL> { [ grave, asciitilde ] };
+    key <TLDE> { [ Control_R ] };
+    modifier_map Control { <LCTL>, <RALT>, <TLDE> };
 };
 ```
