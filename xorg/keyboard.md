@@ -21,7 +21,7 @@
 // (Left) Control -> Esc
 // Esc -> (Right) Control
 partial modifier_keys
-xkb_symbols "hhkb_map" {
+xkb_symbols "hhkb_adj" {
     key <TLDE> { [ Delete, Delete ] };
     key <HENK> { [ grave, asciitilde ] };
     replace key <RALT> { type[Group1] = "TWO_LEVEL",
@@ -33,11 +33,11 @@ xkb_symbols "hhkb_map" {
 ```
 - add to file `/usr/share/X11/xkb/rules/evdev` section `! option    =   symbols`
 ```
-  subkb:hhkb_map        =       +subkb(hhkb_map)
+  subkb:hhkb_adj        =       +subkb(hhkb_adj)
 ```
 - add to file `/usr/share/X11/xkb/rules/evdev.lst` section `! option`
 ```
-  subkb:hhkb_map       (Right) Alt -> (Left) Control -> Esc -> (Right) Control
+  subkb:hhkb_adj       5 replacements, see subkb for details
 ```
 
 ### Standard Keyboard
