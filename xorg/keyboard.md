@@ -28,11 +28,11 @@ xkb_symbols "hhkb_map" {
 ```
 - add to file `/usr/share/X11/xkb/rules/evdev` section `! option    =   symbols`
 ```
-subkb:hhkb_map   =   +subkb(hhkb_map)
+  subkb:hhkb_map        =       +subkb(hhkb_map)
 ```
 - add to file `/usr/share/X11/xkb/rules/evdev.lst` section `! option`
 ```
-subkb:hhkb_map  (Right) Alt -> (Left) Control -> Esc -> (Right) Control
+  subkb:hhkb_map       (Right) Alt -> (Left) Control -> Esc -> (Right) Control
 ```
 
 ### Standard Keyboard
