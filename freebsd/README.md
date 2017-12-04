@@ -80,7 +80,23 @@ PermitRootLogin no
 StrictModes yes
 MaxAuthTries 6
 MaxSessions 20
+
+# sftp
+Match User yyy
+    PasswordAuthentication yes
+    ChrootDirectory /var/sftp
+    ForceCommand internal-sftp
+    AllowTcpForwarding no
+    AllowAgentForwarding no
+    PermitTunnel no
+    PermitTTY no
+    X11Forwarding no
 ```
+
+### sftp Setup
+- `adduser` `yyy` with `home` as `/nonexistent` and `shell` as `nologin`
+- create chrootdir `/var/sftp` owned by `root:root` (for chroot to work)
+- create dir inside `/var/sftp` owned by `yyy` for writing permission
 
 ### Firewall Setup
 This rule blocks a IP for 1 hour if it connects to `sshd` service more than 3 times per minute
