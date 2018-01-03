@@ -3,15 +3,8 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-; swap Capslock and Esc
-Capslock::Esc
-Esc::Capslock
+; left control
+LCtrl::Esc
 
-; swap | and Backspace
-\::BS
-BS::\
-
-; right ctrl
-RAlt::RCtrl
-RCtrl::`
-`::RCtrl
+; ctrl
+RAlt::LCtrl
