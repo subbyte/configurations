@@ -19,7 +19,7 @@ alias la='ls -A'
 alias proxysite='ssh -f -N -D 7070 user@site.com'
 
 # DNS monitor
-alias dnsmonitor='sudo tcpdump -vvv -s 0 -l -n port 53'
+alias dnsmonitor='sudo tcpdump -vvv -s 0 -l -n port 53 | egrep --line-buffered -o "(\w|-|\.)+\.(,| )" | tr -d ,'
 
 # earphone line
 alias earphone='pactl set-default-sink alsa_output.usb-Burr-Brown_from_TI_USB_Audio_CODEC-00.analog-stereo'
@@ -29,4 +29,4 @@ alias cspmount='sshfs user@site.com:/path /mnt/path'
 alias cspumount='fusermount -u /mnt/path'
 
 # screen mirror
-alias mirrorscreen='cvlc --avcodec-hw --fb-hw-accel --no-video-deco --no-embedded-video --screen-fps=30 --screen-left=0 --screen-top=0 --screen-width=1920 --screen-height=1080 screen://'
+# alias mirrorscreen='cvlc --avcodec-hw --fb-hw-accel --no-video-deco --no-embedded-video --screen-fps=30 --screen-left=0 --screen-top=0 --screen-width=1920 --screen-height=1080 screen://'
