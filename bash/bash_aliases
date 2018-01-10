@@ -19,7 +19,7 @@ alias la='ls -A'
 alias proxysite='ssh -f -N -D 7070 user@site.com'
 
 # DNS monitor
-alias dnsmonitor='sudo tcpdump -vvv -s 0 -l -n port 53 | egrep --line-buffered -o "(\w|-|\.)+\.(,| )" | tr -d ,'
+alias dnsmonitor='~/.toolkit/dnsmonitor.py'
 
 # earphone line
 alias earphone='pactl set-default-sink alsa_output.usb-Burr-Brown_from_TI_USB_Audio_CODEC-00.analog-stereo'
