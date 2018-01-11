@@ -35,4 +35,8 @@ def printIfNotSameIter (it):
 if __name__ == "__main__":
     for domain in printIfNotSameIter(capturedDomainIter()):
         comps = domain.split('.')
-        print("{0:16}| {1}".format(comps[-3], domain))
+        if len(comps) > 2:
+            firstleveldomain = comps[-3]
+        else:
+            firstleveldomain = domain[-2]
+        print("{0:16}| {1}".format(firstleveldomain, domain))
