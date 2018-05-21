@@ -28,5 +28,8 @@ alias earphone='pactl set-default-sink alsa_output.usb-Burr-Brown_from_TI_USB_Au
 alias cspmount='sshfs user@site.com:/path /mnt/path'
 alias cspumount='fusermount -u /mnt/path'
 
-# screen mirror
-# alias mirrorscreen='cvlc --avcodec-hw --fb-hw-accel --no-video-deco --no-embedded-video --screen-fps=30 --screen-left=0 --screen-top=0 --screen-width=1920 --screen-height=1080 screen://'
+# stack
+alias stack='/home/xxx/.local/bin/stack'
+
+# VPN
+alias vpn="sudo bash -c 'openconnect -c /path-to-certificate.crt -k /path-to-priv-key.key --csd-wrapper=/usr/share/ibm-config-NetworkManager-openconnect/ohsd.py -v sasvpn.pok.ibm.com &'"
