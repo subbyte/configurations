@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 
 ################################################################
 #        turnoffscreen.sh: Turn Off Screen After Booting
