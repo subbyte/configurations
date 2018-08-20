@@ -8,3 +8,4 @@ LCtrl::Esc
 
 ; ctrl
 RAlt::LCtrl
+Esc::RCtrl

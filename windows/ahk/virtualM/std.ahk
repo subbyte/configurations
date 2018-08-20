@@ -9,4 +9,7 @@ BS::\
 
 ; ctrl
 RAlt::LCtrl
-RCtrl::`
+Esc::RCtrl
+
+; Escape
+Capslock::Esc
