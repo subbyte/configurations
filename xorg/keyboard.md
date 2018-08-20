@@ -60,10 +60,10 @@ EndSection
 - create file `/usr/share/X11/xkb/symbols/subkb`
 ```
 // Adjustment for standard keyboard
-// - Escape <-> CapsLock
 // - Backspace <-> Backslash
+// - CapsLock -> Escape
 // - (Right) Alt -> (Left) Control
-// - Tilde <-> (Right) Control
+// - Escape -> (Right) Control
 partial modifier_keys
 xkb_symbols "std_adj" {
     key <CAPS> { [ Escape ] };
