@@ -67,14 +67,12 @@ EndSection
 partial modifier_keys
 xkb_symbols "std_adj" {
     key <CAPS> { [ Escape ] };
-    key <ESC>  { [ Caps_Lock ] };
+    key <ESC> { [ Control_R ] };
     key <BKSP> { [ backslash, bar ] };
-    key <BKSL> { [ BackSpace, BackSpace ] };
+    key <BKSL> { [ BackSpace ] };
     replace key <RALT> { type[Group1] = "TWO_LEVEL",
                          symbols[Group1] = [ Control_L, Control_L ] };
-    key <TLDE> { [ Control_R, Control_R ] };
-    replace key <RCTL> { [ grave, asciitilde ] };
-    modifier_map Control { <RALT>, <TLDE> };
+    modifier_map Control { <RALT>, <ESC> };
 };
 ```
 - add to file `/usr/share/X11/xkb/rules/evdev` section `! option    =   symbols`
