@@ -5,8 +5,11 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; swap Capslock and Esc
 Capslock::Esc
-Esc::Capslock
+Esc::RCtrl
 
 ; swap | and Backspace
 \::BS
 BS::\
+
+; assign ctrl to alt (if in Linux, this should be LCtrl)
+RAlt::RCtrl
