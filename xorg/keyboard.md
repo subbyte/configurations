@@ -69,7 +69,7 @@ xkb_symbols "std_adj" {
     key <CAPS> { [ Escape ] };
     key <ESC> { [ Control_R ] };
     key <BKSP> { [ backslash, bar ] };
-    key <BKSL> { [ BackSpace ] };
+    key <BKSL> { [ BackSpace, BackSpace ] };
     replace key <RALT> { type[Group1] = "TWO_LEVEL",
                          symbols[Group1] = [ Control_L, Control_L ] };
     modifier_map Control { <RALT>, <ESC> };
