@@ -3,13 +3,11 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
+; Esc and CapsLock are correctly passed from X.org to VirtualBox
+
 ; swap | and Backspace
 \::BS
 BS::\
 
 ; ctrl
 RAlt::LCtrl
-Esc::RCtrl
-
-; Escape
-Capslock::Esc
