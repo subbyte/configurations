@@ -9,5 +9,5 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 \::BS
 BS::\
 
-; ctrl
+; Ctrl
 RAlt::LCtrl

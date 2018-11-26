@@ -3,9 +3,9 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-; left control
+; Esc on the left little finger
 LCtrl::Esc
 
-; ctrl
+; Ctrl keys
 RAlt::LCtrl
 Esc::RCtrl
