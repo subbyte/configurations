@@ -33,3 +33,7 @@ alias stack='/home/xxx/.local/bin/stack'
 
 # VPN
 alias vpn="sudo bash -c 'openconnect -c /path-to-certificate.crt -k /path-to-priv-key.key --csd-wrapper=/usr/share/ibm-config-NetworkManager-openconnect/ohsd.py -v sasvpn.pok.ibm.com &'"
+
+# projector
+alias projector1080p="xrandr --output eDP-1 --mode 1920x1080 --output HDMI-2 --mode 1920x1080 --same-as eDP-1"
+alias projector720p="xrandr --output eDP-1 --mode 1280x720 --output HDMI-2 --mode 1280x720 --same-as eDP-1"
