@@ -37,3 +37,6 @@ alias vpn="sudo bash -c 'openconnect -c /path-to-certificate.crt -k /path-to-pri
 # projector
 alias projector1080p="xrandr --output eDP-1 --mode 1920x1080 --output HDMI-2 --mode 1920x1080 --same-as eDP-1"
 alias projector720p="xrandr --output eDP-1 --mode 1280x720 --output HDMI-2 --mode 1280x720 --same-as eDP-1"
+
+# FreeRDP
+alias rdpconnect="xfreerdp /u:administrator /v:remoteserver:3389 /dynamic-resolution"
