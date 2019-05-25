@@ -1,0 +1,5 @@
+# add 'export ENV=$HOME/.kshrc' to .profile
+
+. /etc/ksh.kshrc
+PS1="\n\033[1;30m[\D{%z %H:%M:%S}] \u@\033[1;32m\h\033[1;30m:\w\033[m\n\\$ "
+set -o vi
