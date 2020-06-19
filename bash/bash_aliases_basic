@@ -1,0 +1,42 @@
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# vim
+alias vi='vim'
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+
+# map the SSH tunnel user@cite.com to 127.0.0.1:7070
+alias proxysite='ssh -f -N -D 7070 user@site.com'
+
+# DNS monitor
+alias dnsmonitor='~/.toolkit/dnsmonitor.py'
+
+# earphone line
+alias earphone='pactl set-default-sink alsa_output.usb-Burr-Brown_from_TI_USB_Audio_CODEC-00.analog-stereo'
+
+# sshfs CSP home dir
+alias cspmount='sshfs user@site.com:/path /mnt/path'
+alias cspumount='fusermount -u /mnt/path'
+
+# stack
+alias stack='/home/xxx/.local/bin/stack'
+
+# VPN
+alias vpn="sudo bash -c 'openconnect -c /path-to-certificate.crt -k /path-to-priv-key.key --csd-wrapper=/usr/share/ibm-config-NetworkManager-openconnect/ohsd.py -v sasvpn.pok.ibm.com &'"
+
+# projector
+alias projector1080p="xrandr --output eDP-1 --mode 1920x1080 --output HDMI-2 --mode 1920x1080 --same-as eDP-1"
+alias projector720p="xrandr --output eDP-1 --mode 1280x720 --output HDMI-2 --mode 1280x720 --same-as eDP-1"
+
+# FreeRDP
+alias rdpconnect="xfreerdp /u:administrator /v:remoteserver:3389 /dynamic-resolution"

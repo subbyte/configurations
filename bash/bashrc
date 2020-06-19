@@ -4,8 +4,11 @@ if [ -f ~/.bashrc_basic ]; then
 fi
 
 # Alias definitions
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.bash_aliases_basic ]; then
+    . ~/.bash_aliases_basic
+fi
+if [ -f ~/.bash_aliases_adv ]; then
+    . ~/.bash_aliases_adv
 fi
 
 # Interactive prompt
