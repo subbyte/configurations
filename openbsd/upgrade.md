@@ -7,7 +7,7 @@
 3. `pkg_add -u`
 4. `sysmerge -d`
 
-## Specific Instrusion for Version
+## Version Specific Instrusions
 
 There may be special instructions to follow for each specfic version upgrade:
 https://www.openbsd.org/faq/
