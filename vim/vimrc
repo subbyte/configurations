@@ -5,6 +5,7 @@
 " nerdcommenter
 " vim-airline
 " vim-airline-themes
+" syntastic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -236,6 +237,6 @@ let Tlist_Use_Right_Window = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Encoding detection with fencview.vim
+" => Syntastic Python Environment
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:fencview_autodetect = 1
+let g:syntastic_python_checkers = ['python3']
