@@ -14,20 +14,20 @@ fi
 # Interactive prompt
 set_prompt()
 {
-   local txtreset="$(tput sgr0)"
-   local txtbold="$(tput bold)"
-   local txtblack="$(tput setaf 0)"
-   local txtred="$(tput setaf 1)"
-   local txtgreen="$(tput setaf 2)"
-   local txtyellow="$(tput setaf 3)"
-   local txtblue="$(tput setaf 4)"
-   local txtpurple="$(tput setaf 5)"
-   local txtcyan="$(tput setaf 6)"
-   local txtwhite="$(tput setaf 7)"
-   local tolastline="$(tput cup $LINES)"
-
-   PS1="\[$tolastline\]\n\[$txtbold\]\[$txtblack\]\D{%Y-%m-%d %a}"
-   PS1+=" "
-   PS1+="\[$txtgreen\]\D{%H:%M:%S}\[$txtblack\] $ \[$txtreset\]\[$txtblack\]"
+    local txtreset="$(tput sgr0)"
+    local txtbold="$(tput bold)"
+    local txtblack="$(tput setaf 0)"
+    local txtred="$(tput setaf 1)"
+    local txtgreen="$(tput setaf 2)"
+    local txtyellow="$(tput setaf 3)"
+    local txtblue="$(tput setaf 4)"
+    local txtpurple="$(tput setaf 5)"
+    local txtcyan="$(tput setaf 6)"
+    local txtwhite="$(tput setaf 7)"
+    local tolastline="$(tput cup $LINES)"
+ 
+    PS1="\[$tolastline\]\n\[$txtbold\]\[$txtblack\]\D{%Y-%m-%d %a}"
+    PS1+=" "
+    PS1+="\[$txtgreen\]\D{%H:%M:%S}\[$txtblack\] $ \[$txtreset\]\[$txtblack\]"
 }
 PROMPT_COMMAND="set_prompt"
