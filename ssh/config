@@ -5,6 +5,12 @@ Host nodeA nodeB
     User xxx
     ProxyCommand ssh firewall.com -W %h:%p
 
+Host github
+    HostName github.com
+    User git 
+    IdentityFile ~/.ssh/github
+    IdentitiesOnly yes 
+
 Host *
     #use my local keys on remote machines
     ForwardAgent yes
