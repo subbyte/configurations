@@ -13,7 +13,12 @@ fi
 
 parse_git_branch()
 {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/{\1}/'
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ {\1}/'
+}
+
+parse_python_venv()
+{
+    if [ ! -z ${VIRTUAL_ENV} ]; then echo " ($(basename $VIRTUAL_ENV))"; fi
 }
 
 # Interactive prompt
@@ -36,10 +41,9 @@ set_prompt()
     #PS1+="\[$txtblack\]\u@\h:\w"
     #PS1+="\[$txtreset\]\n\\$ "
     PS1="\[$tolastline\]\n\[$txtbold\]\[$txtblack\][\D{%z %H:%M:%S}\[$txtblack\]]"
-    PS1+=" "
-    PS1+="\u@\[$txtgreen\]\h\[$txtblack\]:\w"
-    PS1+=" "
+    PS1+=" \u@\[$txtgreen\]\h\[$txtblack\]:\w"
     PS1+="\[$txtred\]$(parse_git_branch)"
+    PS1+="\[$txtpurple\]$(parse_python_venv)"
     PS1+="\[$txtreset\]"
     PS1+="\n\\$ "
 }
