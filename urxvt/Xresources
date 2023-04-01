@@ -7,8 +7,8 @@ Xft.lcdfilter:              lcddefault
 Xft.rgba:                   rgb
 
 URxvt.boldColors:           on
-URxvt.font:                 xft:DejaVu Sans Mono:pixelsize=12,xft:SimSun
-URxvt.boldfont:             xft:DejaVu Sans Mono:pixelsize=12,xft:SimSun
+URxvt.font:                 xft:DejaVu Sans Mono:size=12
+URxvt.boldfont:             xft:DejaVu Sans Mono:size=12
 
 URxvt.cursorBlink:          true
 URxvt.depth:                24

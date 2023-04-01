@@ -22,5 +22,5 @@ sub on_user_command
 	}
 
 	my $size = $level * $fontsize_step;
-	$self->cmd_parse("\033]50;xft:${font}:pixelsize=${size}\007");
+	$self->cmd_parse("\033]50;xft:${font}:size=${size}\007");
 }
