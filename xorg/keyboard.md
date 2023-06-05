@@ -19,9 +19,10 @@
 // - Esc         -> `/~
 // - `/~         -> \/|
 // may not use "default" in the future
-default partial alphanumeric_keys modifier_keys
+partial alphanumeric_keys modifier_keys
 xkb_symbols "hhkb" {
-    key <TLDE> { [ backslash, bar] };
+    // key <TLDE> { [ backslash, bar] };
+    key <TLDE> { [ XF86Time ] };
     key <DELE> { [ BackSpace ] };
     key <BKSP> { [ Delete ] };
     key <LCTL> { [ Escape ] };
@@ -51,41 +52,43 @@ Section "InputClass"
 EndSection
 ```
 
-### Standard Keyboard (to update)
+### Mistel MD600 Alpha
 - create file `/usr/share/X11/xkb/symbols/subkb`
 ```
 // Adjustment for standard keyboard
-// - Backspace <-> Backslash
-// - CapsLock -> Escape
+// - Backslash   -> Backspace
+// - Backspace   -> Backslash
+// - CapsLock    -> Escape
 // - (Right) Alt -> (Left) Control
-// - Escape -> (Right) Control
-partial modifier_keys
-xkb_symbols "std" {
+// - Esc         -> `/~
+partial alphanumeric_keys modifier_keys
+xkb_symbols "md600" {
     key <CAPS> { [ Escape ] };
-    key <ESC> { [ Control_R ] };
+    key <ESC>  { [ grave, asciitilde ] };
     key <BKSP> { [ backslash, bar ] };
     key <BKSL> { [ BackSpace, BackSpace ] };
-    replace key <RALT> { type[Group1] = "TWO_LEVEL",
-                         symbols[Group1] = [ Control_L, Control_L ] };
-    modifier_map Control { <RALT>, <ESC> };
+    key <LWIN> { [ XF86Time ] };
+    key <RALT> { type[Group1] = "TWO_LEVEL",
+                 symbols[Group1] = [ Control_L, Control_L ] };
+    modifier_map Control { <RALT> };
 };
 ```
 - add to file `/usr/share/X11/xkb/rules/evdev` section `! option    =   symbols`
 ```
-  subkb:std             =       +subkb(std)
+  subkb:md600             =       +subkb(md600)
 ```
 - add to file `/usr/share/X11/xkb/rules/evdev.lst` section `! option`
 ```
-  subkb:std            4 replacements, see subkb for details
+  subkb:md600            6 replacements, see subkb for details
 ```
 - create file `/etc/X11/xorg.conf.d/30-keyboard.conf`
 ```
 Section "InputClass"
-        Identifier "standard keyboard"
+        Identifier "MD600"
         MatchIsKeyboard "on"
-        MatchProduct "AT Translated Set 2 keyboard"
+        MatchProduct "MD600 Alpha"
         Driver "evdev"
         Option "XkbLayout" "us"
-        Option "XkbOptions" "subkb:std"
+        Option "XkbOptions" "subkb:md600"
 EndSection
 ```
