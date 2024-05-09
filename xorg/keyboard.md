@@ -55,7 +55,7 @@ EndSection
 ### Mistel MD600 Alpha
 - create file `/usr/share/X11/xkb/symbols/subkb`
 ```
-// Adjustment for standard keyboard
+// Adjustment for Mistel MD600 Alpha keyboard
 // - Backslash   -> Backspace
 // - Backspace   -> Backslash
 // - CapsLock    -> Escape
@@ -63,6 +63,10 @@ EndSection
 // - Esc         -> `/~
 partial alphanumeric_keys modifier_keys
 xkb_symbols "md600" {
+    key <HOME> { [ Left ] };
+    key <LEFT> { [ Down ] };
+    key <DOWN> { [ Up ] };
+    key <UP>   { [ Home ] };
     key <CAPS> { [ Escape ] };
     key <ESC>  { [ grave, asciitilde ] };
     key <BKSP> { [ backslash, bar ] };
