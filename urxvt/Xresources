@@ -1,5 +1,5 @@
-Xft.antialias:true
-Xft.autohint:               0
+Xft.antialias:              true
+Xft.autohint:               true
 Xft.dpi:                    96
 Xft.hinting:                true
 Xft.hintstyle:              hintslight
@@ -7,8 +7,8 @@ Xft.lcdfilter:              lcddefault
 Xft.rgba:                   rgb
 
 URxvt.boldColors:           on
-URxvt.font:                 xft:DejaVu Sans Mono:size=12
-URxvt.boldfont:             xft:DejaVu Sans Mono:size=12
+URxvt.font:                 xft:DejaVu Sans Mono:style=Regular:size=12,xft:Source Han Sans CN:style=Regular:size=12
+URxvt.boldfont:             xft:DejaVu Sans Mono:style=Bold:size=12,xft:Source Han Sans CN:style=Bold:size=12
 
 URxvt.cursorBlink:          true
 URxvt.depth:                24
