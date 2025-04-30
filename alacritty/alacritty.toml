@@ -1,0 +1,29 @@
+[window]
+dynamic_padding = true
+
+[font]
+size = 12.6
+
+[colors.primary]
+foreground = "#c5c8c6"
+background = "#1c1c1c"
+
+[colors.normal]
+black   = "#2e3436"
+red     = "#b61c1c"
+green   = "#5ab208"
+yellow  = "#c4a000"
+blue    = "#4e7fbd"
+magenta = "#75507B"
+cyan    = "#ce5c00"
+white   = "#babdb9"
+
+[colors.bright]
+black   = "#555753"
+red     = "#ef2929"
+green   = "#8ae234"
+yellow  = "#fce94f"
+blue    = "#729fcf"
+magenta = "#ad7fa8"
+cyan    = "#fcaf3e"
+white   = "#eeeeec"
