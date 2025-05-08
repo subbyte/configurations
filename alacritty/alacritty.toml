@@ -1,6 +1,9 @@
 [env]
 TERM = "xterm-256color"
 
+[selection]
+save_to_clipboard = true
+
 [window]
 dynamic_padding = true
 
